@@ -1,0 +1,425 @@
+/* ------------------- GLOBAL ------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  transition: all 0.3s ease;
+}
+
+body {
+  color: #222;
+  line-height: 1.6;
+}
+
+/* ------------------- NAVBAR ------------------- */
+.navbar {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  padding: 20px 10%;
+  z-index: 1000;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  justify-content: flex-end;
+  gap: 40px;
+}
+
+.nav-links a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: #66d1c0;
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* ------------------- HERO ------------------- */
+.hero {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.6);
+  transition: transform 1s ease;
+}
+
+.hero:hover img {
+  transform: scale(1.05);
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+  animation: fadeIn 1.2s ease forwards;
+}
+
+.hero-overlay h1 {
+  font-size: 3.5rem;
+  margin-bottom: 15px;
+}
+
+.hero-overlay p {
+  font-size: 1.3rem;
+  margin-bottom: 30px;
+}
+
+/* BUTTONS */
+.btn {
+  background: #66d1c0;
+  color: #fff;
+  padding: 14px 30px;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: 600;
+  box-shadow: 0 6px 15px rgba(102,209,192,0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(102,209,192,0.6);
+  background-color: #4bb2a5;
+}
+
+/* ------------------- ABOUT ------------------- */
+.about {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 80px 10%;
+  gap: 50px;
+  align-items: center;
+}
+
+.about img {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 16px;
+  transition: transform 0.5s ease;
+}
+
+.about img:hover {
+  transform: scale(1.03);
+}
+
+.about-text {
+  max-width: 500px;
+}
+
+.about-text h2 {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+
+/* ------------------- SERVICES ------------------- */
+.services {
+  padding: 80px 10%;
+  background: #f6f6f6;
+  text-align: center;
+}
+
+.services h2 {
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+  gap: 30px;
+}
+
+.card {
+  background: #fff;
+  padding: 30px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 45px rgba(0,0,0,0.15);
+}
+
+.service-icon {
+  width: 36px;
+  height: 36px;
+  fill: #66d1c0;
+  margin-bottom: 12px;
+  transition: transform 0.3s ease;
+}
+
+.card:hover .service-icon {
+  transform: rotate(15deg) scale(1.1);
+}
+
+/* ------------------- PORTFOLIO ------------------- */
+.portfolio {
+  padding: 80px 10%;
+  text-align: center;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.portfolio-card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+.portfolio-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+}
+
+.portfolio-card img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.portfolio-card:hover img {
+  transform: scale(1.05);
+}
+
+.portfolio-info {
+  padding: 18px;
+  text-align: left;
+}
+
+.portfolio-info h3 {
+  font-size: 1.1rem;
+  margin-bottom: 6px;
+}
+
+.portfolio-info p {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Optional overlay on hover */
+.portfolio-card::after {
+  content: "View Project →";
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  opacity: 0;
+  font-weight: 600;
+  color: #fff;
+  background: rgba(102,209,192,0.85);
+  padding: 6px 14px;
+  border-radius: 12px;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.portfolio-card:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ------------------- WHY CHOOSE US ------------------- */
+.why-choose {
+  padding: 80px 10%;
+  background: #ffffff;
+  text-align: center;
+}
+
+.why-choose h2 {
+  font-size: 2.5rem;
+  margin-bottom: 50px;
+}
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 40px;
+}
+
+.why-card {
+  padding: 30px;
+  background: #fff;
+  border-radius: 16px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.why-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.why-icon {
+  width: 42px;
+  height: 42px;
+  fill: #66d1c0;
+  margin-bottom: 18px;
+}
+
+/* ------------------- CONTACT ------------------- */
+.contact {
+  padding: 80px 10%;
+  background: #fafafa;
+  text-align: center;
+}
+
+form {
+  max-width: 500px;
+  margin: auto;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  transition: all 0.3s ease;
+}
+
+input:focus, textarea:focus {
+  border-color: #66d1c0;
+  box-shadow: 0 0 8px rgba(102,209,192,0.3);
+  outline: none;
+}
+
+/* ------------------- FOOTER ------------------- */
+.footer {
+  background: #66d1c0;
+  color: #ffffff;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.footer p {
+  margin-bottom: 15px;
+  font-size: 0.95rem;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #003d36;
+}
+
+/* ------------------- POPUP ------------------- */
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+}
+
+.popup-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.popup {
+  background: #ffffff;
+  padding: 40px 30px;
+  max-width: 420px;
+  width: 90%;
+  border-radius: 16px;
+  position: relative;
+  text-align: center;
+  transform: translateY(-30px);
+  transition: transform 0.3s ease;
+}
+
+.popup-overlay.active .popup {
+  transform: translateY(0);
+}
+
+.popup-close {
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  font-size: 26px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.popup h2 {
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+}
+
+.popup p {
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+.popup input,
+.popup textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+/* ANIMATION */
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0);}
+}
