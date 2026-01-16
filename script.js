@@ -43,7 +43,7 @@ if (mainForm) {
 }
 
 /* =========================
-   CONSULTATION POPUP
+   CONSULTATION POPUP (FIXED)
 ========================= */
 
 const popup = document.getElementById("consultPopup");
@@ -55,23 +55,23 @@ const popupStatus = document.getElementById("popupStatus");
 window.addEventListener("load", () => {
   if (popup) {
     setTimeout(() => {
-      popup.classList.remove("popup-hidden");
+      popup.classList.add("active");
     }, 600);
   }
 });
 
-// Close popup
+// Close popup (X button)
 if (closePopupBtn) {
   closePopupBtn.addEventListener("click", () => {
-    popup.classList.add("popup-hidden");
+    popup.classList.remove("active");
   });
 }
 
-// Close popup when clicking outside the popup box
+// Close popup when clicking outside popup box
 if (popup) {
   popup.addEventListener("click", (e) => {
     if (e.target === popup) {
-      popup.classList.add("popup-hidden");
+      popup.classList.remove("active");
     }
   });
 }
@@ -112,7 +112,7 @@ if (popupForm) {
       button.disabled = false;
 
       setTimeout(() => {
-        popup.classList.add("popup-hidden");
+        popup.classList.remove("active");
       }, 1200);
     }, 1500);
   });
