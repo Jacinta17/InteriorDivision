@@ -11,6 +11,17 @@ if (mainForm) {
   });
 }
 
+document.getElementById("popupForm").addEventListener("submit", function(e) {
+  const phoneInput = this.querySelector('input[type="tel"]');
+  const phone = phoneInput.value.trim();
+
+  if (!/^\d{10}$/.test(phone)) {
+    e.preventDefault(); // stop form submission
+    alert("Please enter a valid 10-digit phone number");
+    phoneInput.focus();
+  }
+});
+
 /* POPUP */
 const popup = document.getElementById("consultPopup");
 const closePopup = document.getElementById("closePopup");
@@ -23,17 +34,19 @@ closePopup.addEventListener("click", () => {
   popup.classList.remove("active");
 });
 
-/* HAMBURGER */
+/* ------------------- HAMBURGER NAV ------------------- */
 document.addEventListener("DOMContentLoaded", () => {
   const hamburger = document.getElementById("hamburger");
   const navLinks = document.getElementById("navLinks");
 
-  if (!hamburger || !navLinks) return;
+  if (!hamburger || !navLinks) return; // safety check
 
+  // Toggle menu
   hamburger.addEventListener("click", () => {
     navLinks.classList.toggle("active");
   });
 
+  // Close menu when a link is clicked
   navLinks.querySelectorAll("a").forEach(link => {
     link.addEventListener("click", () => {
       navLinks.classList.remove("active");

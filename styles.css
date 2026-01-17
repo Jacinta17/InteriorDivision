@@ -13,15 +13,14 @@ body {
 }
 
 /* ------------------- NAVBAR ------------------- */
-/* ------------------- NAVBAR ------------------- */
 .navbar {
   position: absolute;
   top: 0;
   width: 100%;
   padding: 20px 10%;
   z-index: 1000;
-  display: flex;           /* ✅ ensures flex layout */
-  align-items: center;     /* ✅ vertically center items */
+  display: flex;           /* ensures flex layout */
+  align-items: center;     /* vertically center items */
 }
 
 /* Nav links */
@@ -30,7 +29,7 @@ body {
   display: flex;
   justify-content: flex-end;
   gap: 40px;
-  flex: 1;                 /* ✅ takes remaining space for flex alignment */
+  flex: 1;                 /* takes remaining space for alignment */
 }
 
 .nav-links a {
@@ -57,20 +56,34 @@ body {
   width: 100%;
 }
 
-/* ================== MOBILE ONLY ================== */
+/* ------------------- MOBILE ONLY HAMBURGER ------------------- */
+.hamburger {
+  display: none; /* hidden on desktop */
+}
+
 @media (max-width: 768px) {
+  /* Show hamburger */
   .hamburger {
     display: flex;
     flex-direction: column;
     gap: 6px;
     cursor: pointer;
-    margin-left: auto;   /* ✅ pushes hamburger to the right */
+    margin-left: auto;   /* pushes hamburger to right */
   }
 
+  .hamburger span {
+    width: 26px;
+    height: 2px;
+    background: #ffffff;
+    transition: all 0.3s ease;
+  }
+
+  /* Hide normal nav links */
   .nav-links {
-    display: none;       /* hide links until hamburger clicked */
+    display: none;       /* hidden initially on mobile */
   }
 
+  /* Show menu when hamburger is clicked */
   .nav-links.active {
     display: flex;
     flex-direction: column;
@@ -82,10 +95,15 @@ body {
     background: rgba(0, 0, 0, 0.9);
     padding: 30px 0;
     text-align: center;
-    z-index: 2000;       /* ✅ ensures menu overlays content */
+    z-index: 2000;       /* menu overlays content when active */
   }
 }
 
+/* ------------------- Z-INDEX SAFETY FOR HERO ------------------- */
+.hero {
+  position: relative;
+  z-index: 1; /* ensures hero and images are visible under menu */
+}
 
 /* ------------------- HERO ------------------- */
 .hero {
