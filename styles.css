@@ -13,19 +13,24 @@ body {
 }
 
 /* ------------------- NAVBAR ------------------- */
+/* ------------------- NAVBAR ------------------- */
 .navbar {
   position: absolute;
   top: 0;
   width: 100%;
   padding: 20px 10%;
   z-index: 1000;
+  display: flex;           /* ✅ ensures flex layout */
+  align-items: center;     /* ✅ vertically center items */
 }
 
+/* Nav links */
 .nav-links {
   list-style: none;
   display: flex;
   justify-content: flex-end;
   gap: 40px;
+  flex: 1;                 /* ✅ takes remaining space for flex alignment */
 }
 
 .nav-links a {
@@ -51,6 +56,36 @@ body {
 .nav-links a:hover::after {
   width: 100%;
 }
+
+/* ================== MOBILE ONLY ================== */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    cursor: pointer;
+    margin-left: auto;   /* ✅ pushes hamburger to the right */
+  }
+
+  .nav-links {
+    display: none;       /* hide links until hamburger clicked */
+  }
+
+  .nav-links.active {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 30px 0;
+    text-align: center;
+    z-index: 2000;       /* ✅ ensures menu overlays content */
+  }
+}
+
 
 /* ------------------- HERO ------------------- */
 .hero {
@@ -473,6 +508,7 @@ body {
     flex-direction: column;
     gap: 6px;
     cursor: pointer;
+    margin-left: auto; /* ✅ THIS moves it to the right */
   }
 
   .hamburger span {
