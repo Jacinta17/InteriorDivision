@@ -5,6 +5,8 @@
   box-sizing: border-box;
   font-family: "Helvetica Neue", Arial, sans-serif;
   transition: all 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+  /* Removes blue box on mobile tap */
 }
 
 body {
@@ -67,7 +69,7 @@ body {
     flex-direction: column;
     gap: 6px;
     cursor: pointer;
-    margin-left: auto; /* pushes hamburger to the right */
+    margin-left: auto;
     z-index: 1500;
   }
 
@@ -142,7 +144,7 @@ body {
   margin-bottom: 30px;
 }
 
-/* BUTTONS */
+/* BUTTONS with SHIMMER EFFECT */
 .btn {
   background: #91766E;
   color: #fff;
@@ -150,14 +152,39 @@ body {
   text-decoration: none;
   border-radius: 30px;
   font-weight: 600;
-  box-shadow: 0 6px 15px rgba(145,118,110,0.4);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 6px 15px rgba(145, 118, 110, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s;
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+/* Shimmer Layer */
+.btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: 0.5s;
+}
+
+.btn:hover::after {
+  left: 100%;
 }
 
 .btn:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 25px rgba(102,209,192,0.6);
+  box-shadow: 0 12px 25px rgba(102, 209, 192, 0.6);
   background-color: #B7A7A9;
+}
+
+/* Mobile Touch Physics */
+.btn:active {
+  transform: scale(0.96);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* ------------------- ABOUT ------------------- */
@@ -203,8 +230,21 @@ body {
 
 .service-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 30px;
+}
+
+/* STAGGERED GRID ANIMATION */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .card {
@@ -212,14 +252,35 @@ body {
   padding: 30px;
   border-radius: 16px;
   text-align: center;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  opacity: 1;
+  /* Initial state for animation */
+  opacity: 0;
+  animation: fadeUp 0.8s ease-out forwards;
+}
+
+/* Delay each card slightly */
+.card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.card:nth-child(3) {
+  animation-delay: 0.3s;
 }
 
 .card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 25px 45px rgba(0,0,0,0.15);
+  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.15);
+}
+
+/* Mobile Touch Physics for Card */
+.card:active {
+  transform: scale(0.98);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .service-icon {
@@ -250,14 +311,19 @@ body {
   background: #fff;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
 }
 
 .portfolio-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* Mobile Touch Physics for Portfolio */
+.portfolio-card:active {
+  transform: scale(0.98);
 }
 
 .portfolio-card img {
@@ -287,7 +353,8 @@ body {
 }
 
 .portfolio-card::after {
-  content: "View Project →";
+  content: "View Project \2192";
+  /* Arrow unicode */
   position: absolute;
   bottom: 18px;
   left: 50%;
@@ -334,7 +401,12 @@ body {
 
 .why-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Mobile Touch Physics for Why Card */
+.why-card:active {
+  transform: scale(0.98);
 }
 
 .why-icon {
@@ -356,7 +428,8 @@ form {
   margin: auto;
 }
 
-input, textarea {
+input,
+textarea {
   width: 100%;
   padding: 14px;
   margin-bottom: 15px;
@@ -364,9 +437,10 @@ input, textarea {
   border: 1px solid #ccc;
 }
 
-input:focus, textarea:focus {
+input:focus,
+textarea:focus {
   border-color: #91766E;
-  box-shadow: 0 0 8px rgba(102,209,192,0.3);
+  box-shadow: 0 0 8px rgba(102, 209, 192, 0.3);
   outline: none;
 }
 
@@ -430,13 +504,27 @@ input:focus, textarea:focus {
 
 /* ------------------- ANIMATION ------------------- */
 @keyframes fadeIn {
-  0% { opacity: 0; transform: translateY(20px); }
-  100% { opacity: 1; transform: translateY(0); }
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes heroZoomMobile {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
 }
 
 /* MOBILE ANIMATION SUPPORT */
@@ -445,23 +533,37 @@ input:focus, textarea:focus {
     animation: heroZoomMobile 12s ease-in-out infinite;
   }
 
+  /* 
+     Reset opacity to 1 for mobile if you don't want the stagger effect to run on scroll. 
+     However, if you DO want it to run on load, keep the animation properties.
+     Here we ensure they are visible if animation fails.
+  */
   .card,
   .portfolio-card,
   .why-card {
-    opacity: 1;  /* visible on mobile */
-    transform: translateY(0);
     animation: fadeIn 1s ease forwards;
   }
 }
 
 /* ------------------- MOBILE RESPONSIVE ------------------- */
 @media (max-width: 768px) {
-  .hero-overlay h1 { font-size: 2.3rem; }
-  .hero-overlay p { font-size: 1.1rem; }
-  .navbar { padding: 16px 6%; }
+  .hero-overlay h1 {
+    font-size: 2.3rem;
+  }
+
+  .hero-overlay p {
+    font-size: 1.1rem;
+  }
+
+  .navbar {
+    padding: 16px 6%;
+  }
+
   .about,
   .services,
   .portfolio,
   .why-choose,
-  .contact { padding: 60px 6%; }
+  .contact {
+    padding: 60px 6%;
+  }
 }
