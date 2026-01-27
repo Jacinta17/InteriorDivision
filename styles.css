@@ -568,25 +568,26 @@ textarea:focus {
   }
 }
 
-/* ================= MOBILE ANIMATION VISIBILITY (VIDEO HERO) ================= */
-@media (hover: none) {
+/* ================= MOBILE ANIMATION FIX (FORCE VISIBILITY) ================= */
+@media (max-width: 768px) and (hover: none) {
 
-  /* Hero VIDEO subtle motion on mobile */
+  /* Force initial state so animation is visible */
+  .card,
+  .portfolio-card,
+  .why-card,
+  .about img {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 0.9s ease forwards;
+  }
+
+  /* Hero VIDEO motion (mobile only) */
   .hero video {
     animation: heroZoomMobile 14s ease-in-out infinite;
     will-change: transform;
   }
 
-  /* Ensure hover-based animations are visible on touch */
-  .card,
-  .portfolio-card,
-  .why-card,
-  .about img {
-    animation: fadeIn 0.9s ease forwards;
-    will-change: transform, opacity;
-  }
-
-  /* Show portfolio CTA (hover doesn't exist on mobile) */
+  /* Hover-only CTA must be visible on touch */
   .portfolio-card::after {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
